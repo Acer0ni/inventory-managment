@@ -29,3 +29,19 @@ def show_items(request):
 @api.get("/item/{itemid}", response=ItemOut)
 def get_item_by_id(request, id: str):
     return get_object_or_404(Item, id=id)
+
+
+@api.put("/item/{itemid}", response=ItemOut)
+def update_item(request, id: str, updated_item: ItemIn):
+    item = get_object_or_404(Item, id=id)
+    item.name = updated_item.name
+    item.amount = updated_item.amount
+    item.save()
+    return item
+
+
+@api.delete("/item/{itemid}")
+def delete_item(request, id: str):
+    item = get_object_or_404(Item, id=id)
+    item.delete()
+    return "deleted successfully"
