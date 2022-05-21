@@ -19,5 +19,5 @@ from api.views.item import api
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("items/", api.urls),
+    path("api/", api.urls),
 ]

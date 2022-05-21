@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from ninja import Router, NinjaAPI
 from api.models import Item
 from typing import List
@@ -13,13 +14,18 @@ api = NinjaAPI(
 )
 
 
-@api.post("/", response=ItemOut)
+@api.post("/item", response=ItemOut)
 def create_item(request, new_item: ItemIn):
     item = Item.objects.create(name=new_item.name, amount=new_item.amount)
     item.save()
     return item
 
 
-@api.get("/", response=List[ItemOut])
+@api.get("/item", response=List[ItemOut])
 def show_items(request):
     return Item.objects.all()
+
+
+@api.get("/item/{itemid}", response=ItemOut)
+def get_item_by_id(request, id: str):
+    return get_object_or_404(Item, id=id)
