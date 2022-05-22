@@ -5,43 +5,37 @@ from typing import List
 
 from api.schemas.item import ItemIn, ItemOut
 
-api = NinjaAPI(
-    title="inventory managemnet",
-    description="an api for all your inventory management needs",
-    version="0.0.1",
-    auth=None,
-    csrf=True,
-)
+
+router = Router(tags=["item"])
 
 
-@api.post("/item", response=ItemOut)
+@router.post("/", response=ItemOut)
 def create_item(request, new_item: ItemIn):
-    item = Item.objects.create(name=new_item.name, amount=new_item.amount)
+    item = Item.objects.create(name=new_item.name)
     item.save()
     return item
 
 
-@api.get("/item", response=List[ItemOut])
+@router.get("/", response=List[ItemOut])
 def show_items(request):
     return Item.objects.all()
 
 
-@api.get("/item/{itemid}", response=ItemOut)
-def get_item_by_id(request, id: str):
-    return get_object_or_404(Item, id=id)
+@router.get("/{item_id}", response=ItemOut)
+def get_item_by_id(request, item_id: int):
+    return get_object_or_404(Item, id=item_id)
 
 
-@api.put("/item/{itemid}", response=ItemOut)
-def update_item(request, id: str, updated_item: ItemIn):
-    item = get_object_or_404(Item, id=id)
+@router.put("/{item_id}", response=ItemOut)
+def update_item(request, item_id: str, updated_item: ItemIn):
+    item = get_object_or_404(Item, id=item_id)
     item.name = updated_item.name
-    item.amount = updated_item.amount
     item.save()
     return item
 
 
-@api.delete("/item/{itemid}")
-def delete_item(request, id: str):
-    item = get_object_or_404(Item, id=id)
+@router.delete("/{item_id}")
+def delete_item(request, item_id: str):
+    item = get_object_or_404(Item, id=item_id)
     item.delete()
     return "deleted successfully"

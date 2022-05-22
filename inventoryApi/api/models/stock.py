@@ -1,6 +1,6 @@
 from django.db import models
-from models.item import Item
-from models.warehouse import Warehouse
+from .item import Item
+from .warehouse import Warehouse
 
 
 class Stock(models.Model):
@@ -10,5 +10,9 @@ class Stock(models.Model):
     )
     quantity = models.IntegerField()
 
-    class meta:
-        UniqueConstraint = ("item_id", "warehouse_id")
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["item_id", "warehouse_id"], name="unique location"
+            )
+        ]
