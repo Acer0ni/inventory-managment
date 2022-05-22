@@ -11,4 +11,4 @@ class ItemIn(ModelSchema):
 class ItemOut(ModelSchema):
     class Config:
         model = Item
-        model_fields = fields = ("id", "name")
+        model_fields = ["id", "name"]
