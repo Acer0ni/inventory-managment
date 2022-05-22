@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from ninja import Router, NinjaAPI
+from ninja import Router
 from api.models import Item
 from typing import List
 
@@ -27,7 +27,7 @@ def get_item_by_id(request, item_id: int):
 
 
 @router.put("/{item_id}", response=ItemOut)
-def update_item(request, item_id: str, updated_item: ItemIn):
+def update_item(request, item_id: int, updated_item: ItemIn):
     item = get_object_or_404(Item, id=item_id)
     item.name = updated_item.name
     item.save()
@@ -35,7 +35,7 @@ def update_item(request, item_id: str, updated_item: ItemIn):
 
 
 @router.delete("/{item_id}")
-def delete_item(request, item_id: str):
+def delete_item(request, item_id: int):
     item = get_object_or_404(Item, id=item_id)
     item.delete()
-    return "deleted successfully"
+    return "item deleted successfully"
