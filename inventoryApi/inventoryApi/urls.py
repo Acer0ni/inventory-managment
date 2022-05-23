@@ -15,9 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.shortcuts import redirect
 from api.api import api
 
+
+def redirect_view(request):
+    response = redirect("/api/docs")
+    return response
+
+
 urlpatterns = [
+    path("/", redirect_view),
     path("admin/", admin.site.urls),
     path("api/", api.urls),
 ]
