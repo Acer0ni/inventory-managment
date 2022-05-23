@@ -65,3 +65,11 @@ def move_stock(request, stock_id: int, new_warehouse_id: int, quantity: int):
     new_stock.save()
     stock.save()
     return stock
+
+
+@router.put("/{stock_id}/{quantity}", response=StockOut)
+def update_stock_quantity(request, stock_id: int, quantity: int):
+    stock = get_object_or_404(Stock, id=stock_id)
+    stock.quantity = quantity
+    stock.save()
+    return stock
