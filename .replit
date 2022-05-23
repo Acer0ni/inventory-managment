@@ -1,2 +1,10 @@
 language = "python3"
-run = "python inventoryApi/manage.py runserver 0.0.0.0:8000"
+run = "python inventoryApi/manage.py migrate && python inventoryApi/manage.py runserver 0.0.0.0:8000"
+[packager]
+language = "python"
+
+  [packager.features]
+  # Enables the package search sidebar
+  packageSearch = false
+  # Enabled package guessing
+  guessImports = false
