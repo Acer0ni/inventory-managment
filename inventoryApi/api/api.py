@@ -5,8 +5,7 @@ api = NinjaAPI(
     title="inventory managemnet",
     description="an api for all your inventory management needs",
     version="0.0.1",
-    auth=None,
-    csrf=True,
+    auth=None
 )
 
 from api.views.item import router as item_router
