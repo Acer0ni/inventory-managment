@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-$c8&-*mm-&21!&3&k=rtpu#5^@na08rdiduapnvsz=-@6986^_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["inventory-managment.larryflint.repl.co", "*.id.repl.co"]
+ALLOWED_HOSTS = ["127.0.0.1", "inventory-managment.larryflint.repl.co", ".id.repl.co"]
 
 
 # Application definition

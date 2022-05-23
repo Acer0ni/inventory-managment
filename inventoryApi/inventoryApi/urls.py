@@ -25,7 +25,7 @@ def redirect_view(request):
 
 
 urlpatterns = [
-    path("/", redirect_view),
+    path("", redirect_view),
     path("admin/", admin.site.urls),
     path("api/", api.urls),
 ]
